@@ -1,0 +1,19 @@
+version: '2.1'
+services:
+  db:
+    image: mysql:5.7
+    container_name: drscratchv3_database
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=drscratch
+      - MYSQL_USER=drscratch
+      - MYSQL_ROOT_PASSWORD=password
+    healthcheck:
+      test: "/etc/init.d/mysql status"
+      timeout: 40s
+      retries: 10
+    volumes:
+      - dbdata:/var/run/mysqld
+volumes:
+  dbdata:
